@@ -152,7 +152,7 @@ var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 allEnemies.push(enemy);
 
 // Player's score
-var displayScoreLevel = function(myScore, myLevel, scoreAllGame) {
+var displayScoreLevel = function(yourScore, yourLevel, scoreAllGame) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
     scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Level: ' + yourLevel + ' / ' +
@@ -173,5 +173,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
 
