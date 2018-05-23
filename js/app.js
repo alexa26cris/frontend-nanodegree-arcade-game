@@ -60,16 +60,16 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(inputKey) {
     if (inputKey === 'left') {
-        this.x -= this.speed + 60;
+        this.x -= this.speed + 50;
     }
     if (inputKey === 'up') {
-        this.y -= this.speed + 40;
+        this.y -= this.speed + 35;
     }
     if (inputKey === 'right') {
-        this.x += this.speed + 60;
+        this.x += this.speed + 50;
     }
     if (inputKey === 'down') {
-        this.y += this.speed + 40;
+        this.y += this.speed + 35;
     }
     console.log('inputKey is: ' + inputKey);
 };
@@ -152,10 +152,10 @@ var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 allEnemies.push(enemy);
 
 // Player's score
-var displayScoreLevel = function(yourScore, yourLevel, scoreAllGame) {
+var displayScoreLevel = function(myScore, myLevel, scoreAllGame) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
-    scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Level: ' + yourLevel + ' / ' +
+    scoreLevelDiv.innerHTML = 'Score: ' + myScore + ' / ' + 'Level: ' + myLevel + ' / ' +
         'Score of all games: ' + scoreAllGame;
     document.body.insertBefore(scoreLevelDiv, firstCanvasTag[0]);
 };
@@ -173,4 +173,5 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
 
