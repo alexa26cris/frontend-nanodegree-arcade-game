@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505) {
         this.x = 0;
     }
-    this.checkCollision(this);
+    this.checkCrash(this);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -30,9 +30,11 @@ Enemy.prototype.render = function() {
 };
 
 // Now write your own player class
-//differentCharacter is a multiple options array
-var changeCharacter = ['images/char-cat-girl.png',
-    'images/char-horn-girl.png'];
+//changeCharacter is a multiple options array
+var changeCharacter = [
+    'images/char-cat-girl.png',
+    'images/char-horn-girl.png'
+];
 //character is the selector between the options.
 var character = 0;
 //all characters are loaded here.
@@ -42,7 +44,7 @@ for (var i = 0; i < changeCharacter.length; i++) {
 
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y) {
+var Player = function(x, y, speed, sprite) {
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -71,7 +73,7 @@ Player.prototype.handleInput = function(keyPress) {
     }
     console.log('keyPress is: ' + keyPress);
 };
-Enemy.prototype.checkCollision = function(anEnemy) {
+Enemy.prototype.checkCrash = function(anEnemy) {
     // check for collision between enemy and player
     if (
         player.y + 131 >= anEnemy.y + 90 &&
@@ -79,7 +81,7 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         player.y + 73 <= anEnemy.y + 135 &&
         player.x + 76 >= anEnemy.x + 11
     ) {
-        console.log('Ouch! You lose!');
+        console.log('You lose!');
         //return the player to initial spot
         player.x = 202.5;
         player.y = 383;
@@ -101,7 +103,7 @@ Enemy.prototype.checkCollision = function(anEnemy) {
     if (player.y + 63 <= 0) {
         player.x = 202.5;
         player.y = 383;
-        console.log('Congrats! You win!');
+        console.log('You win!');
 
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 505, 171);
