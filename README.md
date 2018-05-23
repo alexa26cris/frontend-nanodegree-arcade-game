@@ -1,4 +1,4 @@
-<b>Classic Arcade Game Clone</b>
+<strong>Classic Arcade Game Clone</strong>
 
 Description
 This is a memory matching card game. The gameplay rules are very simple: flip over two hidden cards at a time to locate the ones that have the same icon. Click here to play the game!
