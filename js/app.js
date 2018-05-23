@@ -133,7 +133,7 @@ var increaseDifficulty = function(numEnemies) {
     allEnemies.length = 0;
 
     for (var i = 0; i <= numEnemies; i++) {
-        var enemy = new Enemy(Math.random() * 505, Math.random() * 184 + 60, Math.random() * 256);
+        var enemy = new Enemy(Math.random() * 505, Math.random() * 184 + 50, Math.random() * 256);
 
         allEnemies.push(enemy);
     }
@@ -143,11 +143,11 @@ var increaseDifficulty = function(numEnemies) {
 // Place the player object in a variable called player
 var scoreAllGame = 0;
 var allEnemies = [];
-var player = new Player(202.5, 383, 60);
+var player = new Player(202.5, 383, 50);
 var score = 0;
 var gameLevel = 1;
 var scoreLevelDiv = document.createElement('div');
-var enemy = new Enemy(0, Math.random() * 184 + 60, Math.random() * 256);
+var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
 
