@@ -1,5 +1,4 @@
 / Enemies our player must avoid
-
 var Enemy = function(x, y, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -61,16 +60,16 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(inputKey) {
     if (inputKey === 'left') {
-        this.x -= this.speed + 50;
+        this.x -= this.speed + 60;
     }
     if (inputKey === 'up') {
-        this.y -= this.speed + 35;
+        this.y -= this.speed + 40;
     }
     if (inputKey === 'right') {
-        this.x += this.speed + 50;
+        this.x += this.speed + 60;
     }
     if (inputKey === 'down') {
-        this.y += this.speed + 35;
+        this.y += this.speed + 40;
     }
     console.log('inputKey is: ' + inputKey);
 };
@@ -134,7 +133,7 @@ var increaseDifficulty = function(numEnemies) {
     allEnemies.length = 0;
 
     for (var i = 0; i <= numEnemies; i++) {
-        var enemy = new Enemy(Math.random() * 505, Math.random() * 184 + 50, Math.random() * 256);
+        var enemy = new Enemy(Math.random() * 505, Math.random() * 184 + 60, Math.random() * 256);
 
         allEnemies.push(enemy);
     }
@@ -144,11 +143,11 @@ var increaseDifficulty = function(numEnemies) {
 // Place the player object in a variable called player
 var scoreAllGame = 0;
 var allEnemies = [];
-var player = new Player(202.5, 383, 50);
+var player = new Player(202.5, 383, 60);
 var score = 0;
-var gameLevel = 0;
+var gameLevel = 1;
 var scoreLevelDiv = document.createElement('div');
-var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
+var enemy = new Enemy(0, Math.random() * 184 + 60, Math.random() * 256);
 
 allEnemies.push(enemy);
 
@@ -174,3 +173,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
