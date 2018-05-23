@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(x, y, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
@@ -44,7 +44,7 @@ for (var i = 0; i < changeCharacter.length; i++) {
 
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function() {
+var Player = function(x, y, speed, sprite) {
     this.x = x;
     this.y = y;
     this.speed = speed;
