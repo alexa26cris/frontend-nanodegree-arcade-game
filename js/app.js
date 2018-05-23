@@ -58,20 +58,20 @@ Player.prototype.render = function() {
     displayScoreLevel(score, gameLevel, scoreAllGame);
 };
 
-Player.prototype.handleInput = function(keyPress) {
-    if (keyPress === 'left') {
-        this.x -= this.speed + 60;
+Player.prototype.handleInput = function(inputKey) {
+    if (inputKey === 'left') {
+        this.x -= this.speed + 50;
     }
-    if (keyPress === 'up') {
-        this.y -= this.speed + 40;
+    if (inputKey === 'up') {
+        this.y -= this.speed + 35;
     }
-    if (keyPress === 'right') {
-        this.x += this.speed + 60;
+    if (inputKey === 'right') {
+        this.x += this.speed + 50;
     }
-    if (keyPress === 'down') {
-        this.y += this.speed + 40;
+    if (inputKey === 'down') {
+        this.y += this.speed + 35;
     }
-    console.log('keyPress is: ' + keyPress);
+    console.log('inputKey is: ' + inputKey);
 };
 Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
@@ -155,7 +155,7 @@ allEnemies.push(enemy);
 var displayScoreLevel = function(yourScore, yourLevel, scoreAllGame) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
-    scoreLevelDiv.innerHTML = 'Score: ' + myScore + ' / ' + 'Level: ' + myLevel + ' / ' +
+    scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Level: ' + yourLevel + ' / ' +
         'Score of all games: ' + scoreAllGame;
     document.body.insertBefore(scoreLevelDiv, firstCanvasTag[0]);
 };
