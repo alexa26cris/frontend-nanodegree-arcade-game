@@ -1,13 +1,14 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed, sprite) {
+
+var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
-    this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.speed = speed;
 };
 
 // Update the enemy's position, required method for game
@@ -21,7 +22,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505) {
         this.x = 0;
     }
-    this.checkCrash(this);
+    this.checkCollision(this);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -30,27 +31,14 @@ Enemy.prototype.render = function() {
 };
 
 // Now write your own player class
-//differentCharacter is a multiple options array
-var differentCharacter = ['images/char-boy.png',
-    'images/char-cat-girl.png',
-    'images/char-horn-girl.png',
-    'images/char-pink-girl.png',
-    'images/char-princess-girl.png'
-];
-//character is the selector between the options.
-var character = 0;
-//all characters are loaded here.
-for (var i = 0; i < differentCharacter.length; i++) {
-    Resources.load(differentCharacter[i]);
-}
 
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed, sprite) {
+var Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.speed = speed;
-    this.sprite = differentCharacter[character];
+    this.sprite = 'images/char-cat-girl.png';
 };
 
 Player.prototype.update = function(dt) {};
@@ -75,7 +63,8 @@ Player.prototype.handleInput = function(keyPress) {
     }
     console.log('keyPress is: ' + keyPress);
 };
-Enemy.prototype.checkCrash = function(anEnemy) {
+
+Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
     if (
         player.y + 131 >= anEnemy.y + 90 &&
@@ -83,29 +72,18 @@ Enemy.prototype.checkCrash = function(anEnemy) {
         player.y + 73 <= anEnemy.y + 135 &&
         player.x + 76 >= anEnemy.x + 11
     ) {
-        console.log('You lose!');
+        console.log('Ouch, you lose... Try again!');
         //return the player to initial spot
         player.x = 202.5;
         player.y = 383;
-        //change the character selector to next one
-        character += 1;
-        //check if it's game over
-        if (character > differentCharacter.length - 1) {
-            console.log("Game Over!");
-            character = 0;
-            score = 0;
-            gameLevel = 1;
-        }
-        //change the sprite
-        player.sprite = differentCharacter[character];
-    }
+        
 
     // check if player go on water and win the game
     // if player wins, add 1 to the score and level and increase difficult
     if (player.y + 63 <= 0) {
         player.x = 202.5;
         player.y = 383;
-        console.log('You win!');
+        console.log('🎉Congratulations! You win!🎉');
 
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 505, 171);
