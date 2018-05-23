@@ -155,7 +155,7 @@ allEnemies.push(enemy);
 var displayScoreLevel = function(myScore, myLevel, scoreAllGame) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
-    scoreLevelDiv.innerHTML = 'Score: ' + myScore + ' / ' + 'Level: ' + myLevel + ' / ' +
+    scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Level: ' + yourLevel + ' / ' +
         'Score of all games: ' + scoreAllGame;
     document.body.insertBefore(scoreLevelDiv, firstCanvasTag[0]);
 };
