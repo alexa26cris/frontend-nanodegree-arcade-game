@@ -55,7 +55,7 @@ Player.prototype.update = function(dt) {};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    displayScoreLevel(score, gameLevel, scoreAllGame);
+    displayScore(score, scoreAllGame);
 };
 
 Player.prototype.handleInput = function(inputKey) {
@@ -143,17 +143,17 @@ var scoreAllGame = 0;
 var allEnemies = [];
 var player = new Player(202.5, 383, 50);
 var score = 0;
-var scoreLevelDiv = document.createElement('div');
+var scoreDiv = document.createElement('div');
 var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
 
 // Player's score
-var displayScoreLevel = function(yourScore, scoreAllGame) {
+var displayScore = function(yourScore, scoreAllGame) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
-    scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Score of all games: ' + scoreAllGame;
-    document.body.insertBefore(scoreLevelDiv, firstCanvasTag[0]);
+    scoreDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Score of all games: ' + scoreAllGame;
+    document.body.insertBefore(scoreDiv, firstCanvasTag[0]);
 };
 
 
