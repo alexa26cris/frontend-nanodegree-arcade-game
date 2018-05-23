@@ -60,16 +60,16 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress === 'left') {
-        this.x -= this.speed + 50;
+        this.x -= this.speed + 60;
     }
     if (keyPress === 'up') {
-        this.y -= this.speed + 35;
+        this.y -= this.speed + 40;
     }
     if (keyPress === 'right') {
-        this.x += this.speed + 50;
+        this.x += this.speed + 60;
     }
     if (keyPress === 'down') {
-        this.y += this.speed + 35;
+        this.y += this.speed + 40;
     }
     console.log('keyPress is: ' + keyPress);
 };
@@ -81,7 +81,7 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         player.y + 73 <= anEnemy.y + 135 &&
         player.x + 76 >= anEnemy.x + 11
     ) {
-        console.log('You lose!');
+        console.log('Ouch! You lose...');
         //return the player to initial spot
         player.x = 202.5;
         player.y = 383;
@@ -103,9 +103,9 @@ Enemy.prototype.checkCollision = function(anEnemy) {
     if (player.y + 63 <= 0) {
         player.x = 202.5;
         player.y = 383;
-        console.log('You win!');
+        console.log('Congrats! You win!');
 
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = 'yellow';
         ctx.fillRect(0, 0, 505, 171);
 
         score += 1;
@@ -155,7 +155,7 @@ allEnemies.push(enemy);
 var displayScoreLevel = function(yourScore, yourLevel, scoreAllGame) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
-    scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Level: ' + yourLevel + ' / ' +
+    scoreLevelDiv.innerHTML = 'Score: ' + myScore + ' / ' + 'Level: ' + myLevel + ' / ' +
         'Score of all games: ' + scoreAllGame;
     document.body.insertBefore(scoreLevelDiv, firstCanvasTag[0]);
 };
