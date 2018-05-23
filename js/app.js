@@ -1,4 +1,5 @@
 / Enemies our player must avoid
+
 var Enemy = function(x, y, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -55,7 +56,7 @@ Player.prototype.update = function(dt) {};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    displayScore(score, scoreAllGame);
+    displayScoreLevel(score, gameLevel, scoreAllGame);
 };
 
 Player.prototype.handleInput = function(inputKey) {
@@ -81,7 +82,7 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         player.y + 73 <= anEnemy.y + 135 &&
         player.x + 76 >= anEnemy.x + 11
     ) {
-        console.log('Ouch! You lose...');
+        console.log('You lose!');
         //return the player to initial spot
         player.x = 202.5;
         player.y = 383;
@@ -89,9 +90,10 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         character += 1;
         //check if it's game over
         if (character > changeCharacter.length - 1) {
-            console.log("Game over...Try again!");
+            console.log("Game Over!");
             character = 0;
             score = 0;
+            gameLevel = 1;
         }
         //change the sprite
         player.sprite = changeCharacter[character];
@@ -102,14 +104,15 @@ Enemy.prototype.checkCollision = function(anEnemy) {
     if (player.y + 63 <= 0) {
         player.x = 202.5;
         player.y = 383;
-        console.log('Congrats! You win!');
+        console.log('You win!');
 
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 505, 171);
 
         score += 1;
+        gameLevel += 1;
         scoreAllGame += 1;
-        console.log('Your score: ' + score + ', Score of all games: ' +
+        console.log('Your score: ' + score + ', Your level: ' + gameLevel + ', Score of all games: ' +
             scoreAllGame);
         increaseDifficulty(score);
     }
@@ -143,17 +146,19 @@ var scoreAllGame = 0;
 var allEnemies = [];
 var player = new Player(202.5, 383, 50);
 var score = 0;
-var scoreDiv = document.createElement('div');
+var gameLevel = 0;
+var scoreLevelDiv = document.createElement('div');
 var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
 
 // Player's score
-var displayScore = function(yourScore, scoreAllGame) {
+var displayScoreLevel = function(yourScore, yourLevel, scoreAllGame) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
-    scoreDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Score of all games: ' + scoreAllGame;
-    document.body.insertBefore(scoreDiv, firstCanvasTag[0]);
+    scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Level: ' + yourLevel + ' / ' +
+        'Score of all games: ' + scoreAllGame;
+    document.body.insertBefore(scoreLevelDiv, firstCanvasTag[0]);
 };
 
 
@@ -169,4 +174,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
