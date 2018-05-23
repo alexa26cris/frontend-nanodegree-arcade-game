@@ -1,14 +1,13 @@
 // Enemies our player must avoid
-
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
+    this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.speed = speed;
 };
 
 // Update the enemy's position, required method for game
@@ -31,6 +30,15 @@ Enemy.prototype.render = function() {
 };
 
 // Now write your own player class
+//differentCharacter is a multiple options array
+var changeCharacter = ['images/char-cat-girl.png',
+    'images/char-horn-girl.png'];
+//character is the selector between the options.
+var character = 0;
+//all characters are loaded here.
+for (var i = 0; i < changeCharacter.length; i++) {
+    Resources.load(changeCharacter[i]);
+}
 
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -38,7 +46,7 @@ var Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.speed = speed;
-    this.sprite = 'images/char-cat-girl.png';
+    this.sprite = changeCharacter[character];
 };
 
 Player.prototype.update = function(dt) {};
@@ -63,7 +71,6 @@ Player.prototype.handleInput = function(keyPress) {
     }
     console.log('keyPress is: ' + keyPress);
 };
-
 Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
     if (
@@ -72,18 +79,29 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         player.y + 73 <= anEnemy.y + 135 &&
         player.x + 76 >= anEnemy.x + 11
     ) {
-        console.log('Ouch, you lose... Try again!');
+        console.log('Ouch! You lose!');
         //return the player to initial spot
         player.x = 202.5;
         player.y = 383;
-        
+        //change the character selector to next one
+        character += 1;
+        //check if it's game over
+        if (character > changeCharacter.length - 1) {
+            console.log("Game Over!");
+            character = 0;
+            score = 0;
+            gameLevel = 1;
+        }
+        //change the sprite
+        player.sprite = changeCharacter[character];
+    }
 
     // check if player go on water and win the game
     // if player wins, add 1 to the score and level and increase difficult
     if (player.y + 63 <= 0) {
         player.x = 202.5;
         player.y = 383;
-        console.log('🎉Congratulations! You win!🎉');
+        console.log('Congrats! You win!');
 
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 505, 171);
