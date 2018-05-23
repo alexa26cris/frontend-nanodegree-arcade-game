@@ -58,20 +58,20 @@ Player.prototype.render = function() {
     displayScoreLevel(score, gameLevel, scoreAllGame);
 };
 
-Player.prototype.handleInput = function(keyPress) {
-    if (keyPress === 'left') {
+Player.prototype.handleInput = function(inputKey) {
+    if (inputKey === 'left') {
         this.x -= this.speed + 50;
     }
-    if (keyPress === 'up') {
+    if (inputKey === 'up') {
         this.y -= this.speed + 35;
     }
-    if (keyPress === 'right') {
+    if (inputKey === 'right') {
         this.x += this.speed + 50;
     }
-    if (keyPress === 'down') {
+    if (inputKey === 'down') {
         this.y += this.speed + 35;
     }
-    console.log('keyPress is: ' + keyPress);
+    console.log('inputKey is: ' + inputKey);
 };
 Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
