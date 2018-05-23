@@ -17,7 +17,6 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
-    //keep enemies movement within the canvas borders.
     if (this.x >= 505) {
         this.x = 0;
     }
@@ -30,14 +29,11 @@ Enemy.prototype.render = function() {
 };
 
 // Now write your own player class
-//changeCharacter is a multiple options array
 var changeCharacter = [
     'images/char-cat-girl.png',
     'images/char-horn-girl.png'
 ];
-//character is the selector between the options.
 var character = 0;
-//all characters are loaded here.
 for (var i = 0; i < changeCharacter.length; i++) {
     Resources.load(changeCharacter[i]);
 }
@@ -73,8 +69,8 @@ Player.prototype.handleInput = function(inputKey) {
     }
     console.log('inputKey is: ' + inputKey);
 };
+
 Enemy.prototype.checkCollision = function(anEnemy) {
-    // check for collision between enemy and player
     if (
         player.y + 131 >= anEnemy.y + 90 &&
         player.x + 25 <= anEnemy.x + 88 &&
@@ -82,24 +78,19 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         player.x + 76 >= anEnemy.x + 11
     ) {
         console.log('Ouch! You lose...');
-        //return the player to initial spot
         player.x = 202.5;
-        player.y = 383;
-        //change the character selector to next one
+        player.y = 383;       
         character += 1;
-        //check if it's game over
         if (character > changeCharacter.length - 1) {
             console.log("Game Over!");
             character = 0;
             score = 0;
             gameLevel = 1;
         }
-        //change the sprite
         player.sprite = changeCharacter[character];
     }
 
-    // check if player go on water and win the game
-    // if player wins, add 1 to the score and level and increase difficult
+
     if (player.y + 63 <= 0) {
         player.x = 202.5;
         player.y = 383;
@@ -115,7 +106,7 @@ Enemy.prototype.checkCollision = function(anEnemy) {
             scoreAllGame);
         increaseDifficulty(score);
     }
-    // check if player moving beyond wall boundaries
+   
     if (player.y > 383) {
         player.y = 383;
     }
@@ -127,8 +118,6 @@ Enemy.prototype.checkCollision = function(anEnemy) {
     }
 };
 
-// Increase difficult by adding enemies, remove all previous enemies when
-//pass a level and load new set of enemies
 var increaseDifficulty = function(numEnemies) {
     allEnemies.length = 0;
 
