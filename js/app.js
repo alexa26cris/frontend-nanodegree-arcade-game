@@ -1,4 +1,4 @@
-/ Enemies our player must avoid
+// Enemies our player must avoid
 var Enemy = function(x, y, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -58,20 +58,20 @@ Player.prototype.render = function() {
     displayScoreLevel(score, gameLevel, scoreAllGame);
 };
 
-Player.prototype.handleInput = function(inputKey) {
-    if (inputKey === 'left') {
+Player.prototype.handleInput = function(keyPress) {
+    if (keyPress === 'left') {
         this.x -= this.speed + 50;
     }
-    if (inputKey === 'up') {
+    if (keyPress === 'up') {
         this.y -= this.speed + 35;
     }
-    if (inputKey === 'right') {
+    if (keyPress === 'right') {
         this.x += this.speed + 50;
     }
-    if (inputKey === 'down') {
+    if (keyPress === 'down') {
         this.y += this.speed + 35;
     }
-    console.log('inputKey is: ' + inputKey);
+    console.log('keyPress is: ' + keyPress);
 };
 Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
