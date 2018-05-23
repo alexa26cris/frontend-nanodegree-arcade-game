@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed, sprite) {
+var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505) {
         this.x = 0;
     }
-    this.checkCrash(this);
+    this.checkCollision(this);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -44,7 +44,7 @@ for (var i = 0; i < changeCharacter.length; i++) {
 
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed, sprite) {
+var Player = function() {
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -73,7 +73,7 @@ Player.prototype.handleInput = function(keyPress) {
     }
     console.log('keyPress is: ' + keyPress);
 };
-Enemy.prototype.checkCrash = function(anEnemy) {
+Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
     if (
         player.y + 131 >= anEnemy.y + 90 &&
