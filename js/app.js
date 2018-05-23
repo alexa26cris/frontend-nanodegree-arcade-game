@@ -1,10 +1,4 @@
-// Enemies our player must avoid
-var score = 0;
-var gameLevel = 1;
-var allEnemies = [];
-var player = new Player(202.5, 383, 50);
-var scoreLevelDiv = document.createElement('div');
-
+/ Enemies our player must avoid
 var Enemy = function(x, y, speed, sprite) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -87,7 +81,7 @@ Enemy.prototype.checkCollision = function(anEnemy) {
         player.y + 73 <= anEnemy.y + 135 &&
         player.x + 76 >= anEnemy.x + 11
     ) {
-        console.log('You lose!');
+        console.log('Ouch! You lose... Try again!');
         //return the player to initial spot
         player.x = 202.5;
         player.y = 383;
@@ -109,15 +103,15 @@ Enemy.prototype.checkCollision = function(anEnemy) {
     if (player.y + 63 <= 0) {
         player.x = 202.5;
         player.y = 383;
-        console.log('You win!');
+        console.log('Congrats! You win!');
 
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = 'yellow';
         ctx.fillRect(0, 0, 505, 171);
 
         score += 1;
         gameLevel += 1;
-       
-        console.log(Your level: ' + gameLevel + ', 'Your score: ' + score + ');
+        scoreAllGame += 1;
+        console.log('Your score: ' + score + ', Your level: ' + gameLevel + ');
         increaseDifficulty(score);
     }
     // check if player moving beyond wall boundaries
@@ -147,7 +141,11 @@ var increaseDifficulty = function(numEnemies) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-
+var allEnemies = [];
+var player = new Player(202.5, 383, 50);
+var score = 0;
+var gameLevel = 1;
+var scoreLevelDiv = document.createElement('div');
 var enemy = new Enemy(0, Math.random() * 184 + 50, Math.random() * 256);
 
 allEnemies.push(enemy);
@@ -156,7 +154,7 @@ allEnemies.push(enemy);
 var displayScoreLevel = function(yourScore, yourLevel) {
     var canvas = document.getElementsByTagName('canvas');
     var firstCanvasTag = canvas[0];
-    scoreLevelDiv.innerHTML = 'Level: ' + yourLevel + ' / ' + 'Score: ' + yourScore;
+    scoreLevelDiv.innerHTML = 'Score: ' + yourScore + ' / ' + 'Level: ' + yourLevel;
     document.body.insertBefore(scoreLevelDiv, firstCanvasTag[0]);
 };
 
@@ -173,3 +171,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
